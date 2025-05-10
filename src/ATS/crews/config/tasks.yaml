@@ -1,0 +1,74 @@
+# src/job_matching_flow/crews/matching_crew/config/tasks.yaml
+
+content_match_task:
+  description: >
+    Match the content from the resume and job description using keyword comparison.
+
+    Resume keywords: {keywordsfromResume}  
+    Job description keywords: {keywordsFromJob}
+
+    Your task is to:
+    1. Identify overlaps and gaps in relevant keywords and concepts
+    2. Assess how well the resume aligns with the job requirements
+    3. Highlight areas of strength and weakness in the content match
+
+    Provide a score out of 100 based on content relevance, along with a brief explanation.
+  expected_output: >
+    A numeric content match score (0–100) with a summary of strengths and gaps in alignment.
+  agent: content_matching_agent
+
+format_match_task:
+  description: >
+    Match the format of the resume against the expected structure and formatting of the job description.
+
+    Resume = {Content}
+
+    Your task is to:
+    1. Evaluate the structural alignment (headings, order of sections)
+    2. Check formatting consistency (fonts, spacing, layout)
+    3. Identify any major deviations or formatting issues
+
+    Provide a score out of 100 and a summary of findings.
+  expected_output: >
+    A numeric format alignment score (0–100) and a short report on formatting compliance.
+  agent: format_matching_agent
+
+section_specific_task:
+  description: >
+    Analyze and score individual sections of the resume: Education, Experience, Skills.
+
+    Resume sections:
+    - {Content}
+
+    Your task is to:
+    1. Evaluate each section for relevance, completeness, and strength
+    2. Give individual scores out of 100 per section
+    3. Highlight the most and least effective sections
+
+    Output should include scores and short comments per section.
+  expected_output: >
+    Scores (0–100) for each section (Education, Experience, Skills) with commentary.
+  agent: section_specific_agent
+
+overall_score_task:
+  description: >
+    Calculate the overall job match score based on input from other agents.
+
+    Content:
+    - content_match_task
+    - format_match_task
+    - section_specific_task
+
+    Your task is to:
+    1. Weight the input scores appropriately
+    2. Calculate a final score out of 100
+    3. Provide a short summary of the final evaluation and readiness level
+
+    Use weighting: Content (50%), Format (20%), Sections (30%)
+  expected_output: >
+    A final score out of 100 with a justification summary.
+  agent: overall_score_agent
+  context:
+    - content_match_task
+    - format_match_task
+    - section_specific_task
