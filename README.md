@@ -29,6 +29,14 @@
 3. **Set your GROQ API key**
    ```bash
    Create a .env file in the root directory with the following:
-4.**Run the program**
-  ```bash
-   python main.py
+4. **Run the program**
+   ```bash
+    python main.py
+🧠 How It Works
+Parses and preprocesses the uploaded resume and job description.
+Extracts relevant keywords using the GROQ LLM.
+Compares the documents using:
+✅ Cosine similarity
+✅ Semantic similarity
+✅ Domain-specific keyword overlap
+Generates a comprehensive match score with detailed feedback and improvement tips.
