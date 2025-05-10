@@ -23,6 +23,7 @@
    ```bash
    git clone https://github.com/yourusername/ATS-checker-crewai.git
    cd ATS-checker-crewai
+   cd src/ATS
 2. **Install the dependencies**
    ```bash
    pip install -r requirements.txt
