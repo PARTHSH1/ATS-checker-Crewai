@@ -29,7 +29,7 @@
    pip install -r requirements.txt
 3. **Set your GROQ API key**
    ```bash
-   Create a .env file in the root directory with the following:
+   Remove .example and add Groq API key into it 
 4. **Run the program**
    ```bash
     python main.py
